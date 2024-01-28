@@ -16,8 +16,11 @@ btn.addEventListener("click", function(event){
             // divElement = ""            
             for(let astronaut of data.people){
                 divElement.innerHTML += `<ul>
-                <li>${data.people[astronaut]}</li>
+                <li>${astronaut.name}</li>
                 </ul>`
+
+            console.log(astronaut)
+        
             }
 
         })
