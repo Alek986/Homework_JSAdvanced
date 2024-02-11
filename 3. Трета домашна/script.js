@@ -7,7 +7,7 @@ let pageNumber = 0;
 
 resultButton.addEventListener("click", function(event){
     event.preventDefault();
-    pageNumber = 1//me interesira, ako vo generalniot scope vo promenlivata pageNumber stavam  pageNumber = 1, zosto koga kje ja trgnam ovaa linija od kod, i otkako kje stisnam next btn, na povtoren click od ovoj eventListener ne mi ja pokazuva prvata strana kako sto pravi i prvicno. Neli vo fetch vo takov slucaj e povikana prvata strana?    
+    pageNumber = 1    
     fetch(`https://swapi.dev/api/planets/?page=${pageNumber}`)
     .then(function(response){
         response.json()
@@ -20,14 +20,15 @@ resultButton.addEventListener("click", function(event){
                 table.innerHTML += `<tr><td>${planet.name}</td><td>${planet.population}</td><td>${planet.climate}</td><td>${planet.gravity}</td></tr>`
                 console.log(planet)
             }
+                nextButton.style.display = "inline-block";
 
         })
-        .catch(function(data){
-            console.log(data, "An error occured, please try again later!")
+        .catch(function(error){
+            console.log(`${error}, An error occured, please try again later!`)
         })
     })
-    .catch(function(response){
-        console.log("An error occured, please try again later!")
+    .catch(function(error){
+        console.log(`${error}, An error occured, please try again later!`)
         
     })
 })
@@ -49,13 +50,19 @@ nextButton.addEventListener("click", function(event){
                 console.log(planet)
             }
 
+            previousButton.style.display = "inline-block";
+            if(data.next === null){
+                nextButton.style.display = "none"
+            }
+
+
         })
-        .catch(function(data){
-            console.log(data, "An error occured, please try again later!")
+        .catch(function(error){
+            console.log(`${error}, An error occured, please try again later!`)
         })
     })
     .catch(function(error){
-        console.log(error, "An error occured, please try again later!")
+        console.log(`${error}, An error occured, please try again later!`)
         
     })
 })
@@ -78,16 +85,21 @@ previousButton.addEventListener("click", function(event){
                 console.log(planet)
             }
 
+            nextButton.style.display = "inline-block";
+            if(pageNumber === 1){
+                previousButton.style.display = "none"
+            }
+
         })
-        .catch(function(data){
-            console.log(data, "An error occured, please try again later!")
+        .catch(function(error){
+            console.log(`${error}, An error occured, please try again later!`)
         })
     })
     .catch(function(error){
-        console.log(error, "An error occured, please try again later!")
+        console.log(`${error}, An error occured, please try again later!`)
         
     })
 })
 
 
-// znam deka taskot sto e so gubenje na kopcinjata otkako kje se pritisne edno treba da go napravam so style.display = `block` i `none` i znam deka toa treba da go napravam vo posebna funkcija... da mi dadete nasoka mala. :) 
+ 

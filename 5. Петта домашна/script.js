@@ -20,15 +20,23 @@
 
 
 async function fetchTodoById(todoById){
+    try{
     let todoId = await fetch (`https://jsonplaceholder.typicode.com/todos/${todoById}`)
     let parsedTodo = await todoId.json()
     return parsedTodo
+} catch (error){
+    console.log(`Error occured in fetch Todo by id, ${error}`)
+    }
 }
 
 async function fetchUserDataById(userById){
+    try{
     let userId = await fetch (`https://jsonplaceholder.typicode.com/users/${userById}`)
     let parsedUser = await userId.json()
     return parsedUser
+} catch(error){
+    console.log(`Error occured in fetch Todo by id, ${error}`)
+    }
 }
 
 async function getAllData(){
@@ -43,4 +51,4 @@ async function getAllData(){
     }
 }
 
-getAllData()
+getAllData();
